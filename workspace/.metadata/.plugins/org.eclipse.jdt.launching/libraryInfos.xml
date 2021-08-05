@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
-<libraryInfo home="/usr/lib/jvm/java-8-openjdk-amd64" version="1.8.0_252">
-<bootpath>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar"/>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/classes"/>
-</bootpath>
-<extensionDirs>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext"/>
-<entry path="/usr/java/packages/lib/ext"/>
-</extensionDirs>
-<endorsedDirs>
-<entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"/>
-</endorsedDirs>
-</libraryInfo>
+    <libraryInfo home="/data/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.1.v20210528-1205/jre" version="16.0.1"/>
+    <libraryInfo home="/data/jre" version="11.0.11"/>
+    <libraryInfo home="/data/jre/bin" version="11.0.11"/>
+    <libraryInfo home="/data/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.1.v20210528-1205" version="16.0.1"/>
 </libraryInfos>
