@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
+    <libraryInfo home="/data/jdk11" version="11.0.12"/>
     <libraryInfo home="/data/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_16.0.1.v20210528-1205/jre" version="16.0.1"/>
     <libraryInfo home="/data/jre" version="11.0.11"/>
     <libraryInfo home="/data/jre/bin" version="11.0.11"/>

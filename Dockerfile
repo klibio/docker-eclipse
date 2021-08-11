@@ -9,8 +9,8 @@ RUN go mod init build && \
 # APPLICATION RUNTIME container
 FROM debian:buster
 
-ARG BUILD_DATE
-ARG VCS_REF
+ARG BUILD_DATE=NOT-SET
+ARG VCS_REF=NOT-SET
 
 LABEL org.opencontainers.image.authors="dev@klib.io" \
       org.label-schema.build-date=$BUILD_DATE \
@@ -41,8 +41,8 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
-COPY menu.xml /etc/xdg/openbox/
-COPY supervisord.conf /etc/
+COPY resources/menu.xml /etc/xdg/openbox/
+COPY resources/supervisord.conf /etc/
 
 EXPOSE 8080
 
@@ -75,6 +75,7 @@ SHELL [ "/bin/bash", "-c"]
 RUN cd /data && \
     wget -q -O - ${EclipseURL} | tar -xvz
 
-COPY environment /etc/environment
+COPY resources/.bashrc /data/.bashrc
+COPY resources/custom_eclipse.ini /data/eclipse/eclipse.ini
 
 CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
