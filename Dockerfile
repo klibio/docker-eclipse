@@ -52,9 +52,6 @@ RUN groupadd --gid 1000 app && \
     mkdir -p /data && \
     echo $VERSION.$BUILD_DATE > /data/build_$VERSION.$BUILD_DATE.txt
 
-#SHELL [ "/bin/bash", "-c"]
-#RUN set -eux; \
-
 ADD resources/data /data
 RUN cd /data && \
     ./setup_01_java.sh && \
