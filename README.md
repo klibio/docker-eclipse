@@ -38,6 +38,3 @@ docker build \
   -t klibio/eclipse:latest \
   .
 ```
-
-
-
