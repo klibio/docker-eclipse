@@ -30,8 +30,8 @@ echo "# successfully pushed $IMAGE:$VERSION.$DATE to DockerHub https://hub.docke
 if [ "$BRANCH" = "main" ]; then
   docker push "$IMAGE:latest"
   echo "# successfully updated $IMAGE:latest image on DockerHub https://hub.docker.com/r/$IMAGE"
-else
-  docker push "$IMAGE:next"
-  echo "# successfully updated $IMAGE:next image on DockerHub https://hub.docker.com/r/$IMAGE"
+#else
+#  docker push "$IMAGE:next"
+#  echo "# successfully updated $IMAGE:next image on DockerHub https://hub.docker.com/r/$IMAGE"
 fi
 exit 0
