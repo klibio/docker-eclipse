@@ -18,9 +18,8 @@ Installation of eclipse IDE is done via Eclipse OSGi starterkit.
 From within the root project directory run 
 ```bash
 #!/bin/bash
-docker container run \
-  -d \
-  --mount type=bind,source="$(pwd)"/workspace,target=/data/eclipse-workspace \
+docker container run -d \
+  --mount type=bind,source="$(pwd)"/workspace,target=/data/workspace \
   -p 5858:5800 \
   klibio/eclipse:latest
 ```
