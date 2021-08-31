@@ -22,7 +22,7 @@ docker container run \
   -d \
   --mount type=bind,source="$(pwd)"/workspace,target=/data/eclipse-workspace \
   -p 5858:5800 \
-  klibio/docker-eclipse:latest
+  klibio/eclipse:latest
 ```
 
 Access the desktop via [WebBrowser - http://localhost:5858](http://localhost:5858)
@@ -36,7 +36,7 @@ docker build \
   --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
   --build-arg VCS_REF=$(git rev-list -1 HEAD) \
   --build-arg VERSION=`cat version.txt` \
-  -t klibio/docker-eclipse:latest \
+  -t klibio/eclipse:latest \
   .
 ```
 
