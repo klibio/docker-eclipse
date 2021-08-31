@@ -27,5 +27,5 @@ jobs:
       run: |
         /bin/bash ${GITHUB_WORKSPACE}/buildAndPublish.sh
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
