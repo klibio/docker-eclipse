@@ -2,7 +2,7 @@
 set -eux && SCRIPT_DIR="$( cd $( dirname ${BASH_SOURCE[0]} ) >/dev/null 2>&1 && pwd )"
 
 # this script downloads and prepares the osgi starterkit for cmd line p2.director usage
-echo "download and extract OSGi-starterkit"
+echo "# download, extract and configure OSGi-starterkit"
 cd $SCRIPT_DIR
 BINARY_URL='https://www.eclipse.org/downloads/download.php?file=/equinox/drops/R-4.20-202106111600/EclipseRT-OSGi-StarterKit-4.20-linux-gtk-x86_64.tar.gz&r=1'
 curl -LfsSo starterkit.tar.gz ${BINARY_URL}
@@ -33,5 +33,10 @@ CONFIG_FILE=${SCRIPT_DIR}/osgi/configuration/config.ini
 sed -i 's/p2.director_2.5.0.v20210325-0750.jar@4,reference/p2.director_2.5.0.v20210325-0750.jar@4,reference\\:file\\:'${RUNTIME_BUNDLE}'@4:start,reference\\:file\\:'${CONTENTYPE_BUNDLE}'@4,reference\\:file\\:'${DIRECTOR_BUNDLE}'@4,reference\\:file\\:'${NET_BUNDLE}'@4,reference/g' ${CONFIG_FILE}
 # format config.ini file
 sed -i 's/reference\\:/\\\n  reference\\:/g' ${CONFIG_FILE}
-# modify start level
+# modify start org.apache.felix.scr level
 sed -i 's/'${SCR_BUNDLE}'@4/'${SCR_BUNDLE}'@2:start/g' ${CONFIG_FILE}
+
+# modify config.ini for p2.director execution
+sed -i 's/osgi.noShutdown=true/osgi.noShutdown=false/g; s/eclipse.ignoreApp=true/eclipse.ignoreApp=false/g' ${CONFIG_FILE}
+# modify rt.ini for p2.director execution
+sed -i 's/-noexit/#-noexit/g; s/-Declipse.ignoreApp=true/-Declipse.ignoreApp=false/g' ${SCRIPT_DIR}/osgi/rt.ini

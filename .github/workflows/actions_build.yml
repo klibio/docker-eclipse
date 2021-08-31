@@ -1,0 +1,31 @@
+name: 'Build and publish to Docker Hub'
+
+env:
+   NAME: "klibio/docker-eclipse"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+     - 'main'
+     - 'feature/*'
+     - 'bugfix/*'
+  pull_request:
+    branches:
+     - 'main'
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+       with:
+        fetch-depth: 1
+     - 
+      name: Build docker image and push to docker hub
+      id: script
+      run: |
+        /bin/bash ${GITHUB_WORKSPACE}/buildAndPublish.sh
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

@@ -7,14 +7,16 @@ RUN go mod init build && \
     go build -o /bin/easy-novnc github.com/geek1011/easy-novnc
 
 # APPLICATION RUNTIME container
-FROM debian:buster
+FROM debian:buster-slim
 
+ARG VERSION=0.1.0
 ARG BUILD_DATE=NOT-SET
 ARG VCS_REF=NOT-SET
 
 LABEL org.opencontainers.image.authors="dev@klib.io" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.vcs-url="https://github.com/klibio/example.bnd.rcp" \
+      org.label-schema.version=$VERSION.$BUILD_DATE \
+      org.label-schema.vcs-url="https://github.com/klibio/docker-osgi-starterkit" \
       org.label-schema.vcs-ref=$VCS_REF
 # Workaround https://unix.stackexchange.com/questions/2544/how-to-work-around-release-file-expired-problem-on-a-local-mirror
 RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until
@@ -32,13 +34,12 @@ RUN apt-get update -y && \
         xarchiver \
         nano \
         geany \
-        procps && \
+        procps \
+        \
+        lxterminal wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip \
+        tzdata curl ca-certificates && \
     rm -rf /var/lib/apt/lists && \
     mkdir -p /usr/share/desktop-directories
-
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends lxterminal wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip && \
-    rm -rf /var/lib/apt/lists
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY resources/etc /etc
@@ -48,7 +49,8 @@ EXPOSE 8080
 #add unix user and group with specific home dir ~
 RUN groupadd --gid 1000 app && \
     useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
-    mkdir -p /data
+    mkdir -p /data && \
+    echo $VERSION.$BUILD_DATE > /data/build_$VERSION.$BUILD_DATE.txt
 
 #SHELL [ "/bin/bash", "-c"]
 #RUN set -eux; \
