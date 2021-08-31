@@ -16,7 +16,7 @@
                 <execute>/usr/bin/pcmanfm</execute>
             </action>
         </item>
-        <item label="Eclipse IDE for Java Dev">
+        <item label="Eclipse IDE">
             <action name="Execute">
                 <execute>/data/eclipse/eclipse</execute>
             </action>

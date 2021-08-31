@@ -41,8 +41,7 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
-COPY resources/menu.xml /etc/xdg/openbox/
-COPY resources/supervisord.conf /etc/
+COPY resources/etc /etc
 
 EXPOSE 8080
 
@@ -50,32 +49,16 @@ EXPOSE 8080
 RUN groupadd --gid 1000 app && \
     useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
     mkdir -p /data
-VOLUME /data
 
-ARG Java11URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
-ARG Java8URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u302b08.tar.gz
+#SHELL [ "/bin/bash", "-c"]
+#RUN set -eux; \
 
-SHELL [ "/bin/bash", "-c"]
+ADD resources/data /data
 RUN cd /data && \
-    wget -q -O - ${Java11URL} | tar -xvz && \
-    JavaURLdecoded=$(echo "$Java11URL" | sed "s/%2B/+/") \
-    extractJava11Dir=`expr "${JavaURLdecoded}" : '.*/\(.*\)/.*'` && mv ${extractJava11Dir} jdk11 && \
-    export JAVA_HOME=/data/jre/${extractJavaDir} && \
-    export PATH="${JAVA_HOME}/bin:$PATH"
-
-# Download and unpack Java8 binaries
-SHELL [ "/bin/bash", "-c"]
-RUN cd /data && \
-    wget -q -O - ${Java8URL} | tar -xvz && \
-    extractJava8Dir=`expr "${Java8URL}" : '.*/\(.*\)/.*'` && mv ${extractJava8Dir} jdk8
-
-# Download and unpack eclipse for Java Devs (version 2021-06)
-ARG EclipseURL=https://ftp.fau.de/eclipse/technology/epp/downloads/release/2021-06/R/eclipse-java-2021-06-R-linux-gtk-x86_64.tar.gz
-SHELL [ "/bin/bash", "-c"]
-RUN cd /data && \
-    wget -q -O - ${EclipseURL} | tar -xvz
-
-COPY resources/.bashrc /data/.bashrc
-COPY resources/custom_eclipse.ini /data/eclipse/eclipse.ini
+    ./setup_01_java.sh && \
+    ./setup_02_osgi-starterkit.sh && \
+    ./setup_03_eclipse.sh
+ENV JAVA_HOME=/data/jre
+ENV PATH=/data/jre/bin:$PATH
 
 CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
