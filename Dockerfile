@@ -9,7 +9,7 @@ RUN go mod init build && \
 # APPLICATION RUNTIME container
 FROM debian:buster-slim
 
-ARG VERSION=0.1.0
+ARG VERSION=NOT-SET
 ARG BUILD_DATE=NOT-SET
 ARG VCS_REF=NOT-SET
 
