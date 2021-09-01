@@ -36,7 +36,7 @@ RUN apt-get update -y && \
         geany \
         procps \
         \
-        lxterminal wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip \
+        lxterminal wget openssh-client rsync ca-certificates jq xdg-utils htop tar xzip gzip bzip2 zip unzip \
         tzdata curl ca-certificates && \
     rm -rf /var/lib/apt/lists && \
     mkdir -p /usr/share/desktop-directories
@@ -57,7 +57,7 @@ RUN cd /data && \
     ./setup_01_java.sh && \
     ./setup_02_osgi-starterkit.sh && \
     ./setup_03_eclipse.sh
-ENV JAVA_HOME=/data/jre
-ENV PATH=/data/jre/bin:$PATH
+ENV JAVA_HOME=/data/jdk
+ENV PATH=/data/jdk/bin:$PATH
 
 CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]

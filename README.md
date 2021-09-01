@@ -14,6 +14,7 @@ Based on AdoptOpenJDK - OpenJDK 11 (LTS)
 [![OpenIssues](https://img.shields.io/github/issues-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/issues?q=is%3Aopen+is%3Aissue)
 [![OpenPullRequests](https://img.shields.io/github/issues-pr-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/pulls?q=is%3Aopen+is%3Apr)
 
+![Screenshot](doc/img/01_EclipseSplash.png)
 ## run docker image
 From within the root project directory run 
 ```bash

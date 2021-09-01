@@ -1,4 +1,5 @@
 resources/data/eclipse/
+resources/data/jdk/
 resources/data/jre/
 resources/data/osgi/
 resources/data/rt/
