@@ -2,7 +2,7 @@
 
 This images provides a browser based OSGi Java IDE [Eclipse](https://download.eclipse.org/eclipse/downloads/).
 Installation of Eclipse IDE is done via [Eclipse OSGi starterkit](https://www.eclipse.org/equinox/).
-Based on AdoptOpenJDK - OpenJDK 11 (LTS)
+Based on [AdoptOpenJDK](https://adoptopenjdk.net/) - OpenJDK 11 (LTS)
 ## container
 [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/klibio/eclipse/latest)](https://hub.docker.com/r/klibio/eclipse)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/klibio/eclipse/latest)](https://hub.docker.com/r/klibio/eclipse)
@@ -14,7 +14,7 @@ Based on AdoptOpenJDK - OpenJDK 11 (LTS)
 [![OpenIssues](https://img.shields.io/github/issues-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/issues?q=is%3Aopen+is%3Aissue)
 [![OpenPullRequests](https://img.shields.io/github/issues-pr-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/pulls?q=is%3Aopen+is%3Apr)
 
-![Screenshot](doc/img/01_EclipseSplash.png)
+![Screenshot](doc/img/05_feature_complete.png)
 ## run docker image
 From within the root project directory run 
 ```bash
@@ -39,3 +39,8 @@ docker build \
   -t klibio/eclipse:latest \
   .
 ```
+
+# Further information
+
+* [Screenshots](doc/screenshots.md)
+* [Development](doc/dev.md)
