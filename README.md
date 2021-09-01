@@ -19,7 +19,11 @@ Based on
 [![OpenIssues](https://img.shields.io/github/issues-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/issues?q=is%3Aopen+is%3Aissue)
 [![OpenPullRequests](https://img.shields.io/github/issues-pr-raw/klibio/docker-eclipse)](https://github.com/klibio/docker-eclipse/pulls?q=is%3Aopen+is%3Apr)
 
+<<<<<<< HEAD
 ![Screenshot](doc/img/05_feature_complete.png)
+=======
+![Screenshot](doc/img/01_EclipseSplash.png)
+>>>>>>> d21858d... Feature/refactor (#9)
 ## run docker image
 From within the root project directory run 
 ```bash
