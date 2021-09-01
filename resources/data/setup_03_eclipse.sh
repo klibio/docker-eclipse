@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eux && scriptDir="$( cd $( dirname ${BASH_SOURCE[0]} ) >/dev/null 2>&1 && pwd )"
 
-PATH=${scriptDir}/jre/bin:$PATH
+PATH=${scriptDir}/jdk/bin:$PATH
 
 REPOS=\
 http://download.eclipse.org/eclipse/updates/4.20/R-4.20-202106111600,\
