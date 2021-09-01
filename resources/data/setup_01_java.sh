@@ -8,5 +8,3 @@ JAVA_ARCHIVE=$(echo "${JAVA_URL}" | sed "s/.*\///")
 mkdir $SCRIPT_DIR/jre
 curl -LfsSo ${JAVA_ARCHIVE} ${JAVA_URL} && tar -xvzf ${JAVA_ARCHIVE} --strip-components=1 -C $SCRIPT_DIR/jre
 rm -rf $JAVA_ARCHIVE
-JAVA_HOME=${SCRIPT_DIR}/jre
-PATH=${JAVA_HOME}/bin:$PATH
