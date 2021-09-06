@@ -1,8 +1,13 @@
 # docker-eclipse
 
-This images provides a browser based OSGi Java IDE [Eclipse](https://download.eclipse.org/eclipse/downloads/).
+This images provides a browser based OSGi Java IDE [Eclipse](https://eclipse.org).
 Installation of Eclipse IDE is done via [Eclipse OSGi starterkit](https://www.eclipse.org/equinox/).
-Based on [AdoptOpenJDK](https://adoptopenjdk.net/) - OpenJDK 11 (LTS)
+Based on 
+* Docker base image - [debian:buster-slim](https://hub.docker.com/_/debian)
+* Java - OpenJDK 11 (LTS) [AdoptOpenJDK](https://adoptopenjdk.net/)
+* IDE - [Eclipse](https://eclipse.org)
+* OSGi development - [bndtools](https://bndtools.org/)
+
 ## container
 [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/klibio/eclipse/latest)](https://hub.docker.com/r/klibio/eclipse)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/klibio/eclipse/latest)](https://hub.docker.com/r/klibio/eclipse)
