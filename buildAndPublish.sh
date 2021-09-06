@@ -10,28 +10,33 @@ fi
 set -eauo pipefail
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-DATE=$(date +'%Y.%m.%d-%H.%M.%S')
+DATE=$(date +'%Y-%m-%d_%H-%M-%S')
 IMAGE="klibio/eclipse"
 VERSION=`cat version.txt`
-echo "# launching docker build for image $IMAGE:$VERSION.$DATE"
+echo "# launching docker build for image $IMAGE"
 docker build \
   --no-cache \
   --progress=plain \
   --build-arg BUILD_DATE=$DATE \
   --build-arg VCS_REF=$(git rev-list -1 HEAD) \
   --build-arg VERSION=$VERSION \
-  -t "$IMAGE:$VERSION.$DATE" \
-  -t "$IMAGE:latest" \
+  -t $IMAGE \
   .
 
 echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker push "$IMAGE:$VERSION.$DATE"
-echo "# successfully pushed $IMAGE:$VERSION.$DATE to DockerHub https://hub.docker.com/r/$IMAGE"
+
+echo "# docker image tag $IMAGE $IMAGE:$VERSION.$DATE"
+docker image tag $IMAGE $IMAGE:$VERSION.$DATE
+
+echo "# docker image tag $IMAGE $IMAGE:${BRANCH/\//-}"
+docker image tag $IMAGE $IMAGE:${BRANCH/\//-}
+
 if [ "$BRANCH" = "main" ]; then
-  docker push "$IMAGE:latest"
-  echo "# successfully updated $IMAGE:latest image on DockerHub https://hub.docker.com/r/$IMAGE"
-#else
-#  docker push "$IMAGE:next"
-#  echo "# successfully updated $IMAGE:next image on DockerHub https://hub.docker.com/r/$IMAGE"
+  docker image tag $IMAGE $IMAGE:latest
+  echo "# docker image tag $IMAGE $IMAGE:latest"
+else
+  docker image tag $IMAGE $IMAGE:next
+  echo "# docker image tag $IMAGE $IMAGE:next"
 fi
+docker image push --all-tags $IMAGE
 exit 0
