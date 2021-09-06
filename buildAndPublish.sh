@@ -25,13 +25,14 @@ docker build \
   .
 
 echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker push "$IMAGE:$VERSION.$DATE"
+docker image tag "$IMAGE:$VERSION.$DATE"
 echo "# successfully pushed $IMAGE:$VERSION.$DATE to DockerHub https://hub.docker.com/r/$IMAGE"
 if [ "$BRANCH" = "main" ]; then
-  docker push "$IMAGE:latest"
+  docker image tag "$IMAGE:latest"
   echo "# successfully updated $IMAGE:latest image on DockerHub https://hub.docker.com/r/$IMAGE"
-#else
-#  docker push "$IMAGE:next"
-#  echo "# successfully updated $IMAGE:next image on DockerHub https://hub.docker.com/r/$IMAGE"
+else
+  docker image tag "$IMAGE:next"
+  echo "# successfully updated $IMAGE:next image on DockerHub https://hub.docker.com/r/$IMAGE"
 fi
+docker image push --all-tags "$IMAGE"
 exit 0
