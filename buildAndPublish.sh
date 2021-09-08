@@ -21,22 +21,29 @@ docker build \
   --build-arg VCS_REF=$(git rev-list -1 HEAD) \
   --build-arg VERSION=$VERSION \
   -t $IMAGE \
-  .
+  . \
+
+# tagging and pushing docker image
 
 echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+# docker images are tagged with multiple tags depending on branch
+# all images are tagged with version and date
+# main branch will update the latest tag
+# feature/bugfix branches will get a tag with there branch name (replacing slash with dash)
 
 echo "# docker image tag $IMAGE $IMAGE:$VERSION.$DATE"
 docker image tag $IMAGE $IMAGE:$VERSION.$DATE
 
-echo "# docker image tag $IMAGE $IMAGE:${BRANCH/\//-}"
-docker image tag $IMAGE $IMAGE:${BRANCH/\//-}
-
 if [ "$BRANCH" = "main" ]; then
-  docker image tag $IMAGE $IMAGE:latest
   echo "# docker image tag $IMAGE $IMAGE:latest"
+  docker image tag $IMAGE $IMAGE:latest
 else
-  docker image tag $IMAGE $IMAGE:next
+  echo "# docker image tag $IMAGE $IMAGE:${BRANCH/\//-}"
+  docker image tag $IMAGE $IMAGE:${BRANCH/\//-}
+
   echo "# docker image tag $IMAGE $IMAGE:next"
+  docker image tag $IMAGE $IMAGE:next
 fi
 docker image push --all-tags $IMAGE
 exit 0
