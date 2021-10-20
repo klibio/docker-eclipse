@@ -52,7 +52,7 @@ RUN groupadd --gid 1000 app && \
     mkdir -p /data && \
     echo $VERSION.$BUILD_DATE > /data/build_$VERSION.$BUILD_DATE.txt
 
-ADD resources/data /data
+ADD --chown=app:app resources/data /data/
 RUN cd /data && \
     ./setup_01_java.sh && \
     ./setup_02_osgi-starterkit.sh && \
@@ -60,4 +60,5 @@ RUN cd /data && \
 ENV JAVA_HOME=/data/jdk
 ENV PATH=/data/jdk/bin:$PATH
 
-CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
+ENTRYPOINT [ "exec gosu app supervisord" ]
+#CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
