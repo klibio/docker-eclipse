@@ -49,6 +49,7 @@ EXPOSE 8080
 #add unix user and group with specific home dir ~
 RUN groupadd --gid 1000 app && \
     useradd --home-dir /data --shell /bin/bash --uid 1000 --gid 1000 app && \
+    usermod -a -G tty app && \
     mkdir -p /data && \
     echo $VERSION.$BUILD_DATE > /data/build_$VERSION.$BUILD_DATE.txt
 
@@ -60,5 +61,4 @@ RUN cd /data && \
 ENV JAVA_HOME=/data/jdk
 ENV PATH=/data/jdk/bin:$PATH
 
-ENTRYPOINT [ "exec gosu app supervisord" ]
-#CMD ["sh", "-c", "chown app:app /data /dev/stdout && exec gosu app supervisord"]
+ENTRYPOINT [ "sh", "-c", "gosu app supervisord" ]
