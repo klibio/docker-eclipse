@@ -1,5 +1,5 @@
 #!/bin/bash
-# this script downloads and prepares the java runtime
+# this script downloads and prepares the java runtime sdk
 set -eux && SCRIPT_DIR="$( cd $( dirname ${BASH_SOURCE[0]} ) >/dev/null 2>&1 && pwd )" && cd $SCRIPT_DIR
 
 # AdoptOpenJDK API - https://api.adoptopenjdk.net/README

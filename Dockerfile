@@ -20,8 +20,8 @@ LABEL org.opencontainers.image.authors="dev@klib.io" \
       org.label-schema.vcs-ref=$VCS_REF
 # Workaround https://unix.stackexchange.com/questions/2544/how-to-work-around-release-file-expired-problem-on-a-local-mirror
 RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         openbox \
         tigervnc-standalone-server \
         supervisor \
@@ -38,13 +38,13 @@ RUN apt-get update -y && \
         \
         lxterminal wget openssh-client rsync ca-certificates jq xdg-utils htop tar xzip gzip bzip2 zip unzip \
         tzdata curl ca-certificates && \
-    rm -rf /var/lib/apt/lists && \
+    rm -rf /var/lib/apt/lists/* && \
     mkdir -p /usr/share/desktop-directories
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY resources/etc /etc
 
-EXPOSE 8080
+EXPOSE 5800
 
 #add unix user and group with specific home dir ~
 RUN groupadd --gid 1000 app && \
